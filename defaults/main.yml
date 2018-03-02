@@ -40,7 +40,7 @@ prometheus_internal_hostname: localhost
 prometheus_enable_remote_shutdown: 'false'
 
 # ALERTMANAGER
-prometheus_alertmanager_host: localhost
+prometheus_alertmanager_host: "{{ prometheus_internal_hostname }}"
 prometheus_alertmanager_port: 9093
 
 # STORAGE
