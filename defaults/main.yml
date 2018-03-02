@@ -35,6 +35,7 @@ prometheus_rules_templates_path: "{{ playbook_dir }}/templates/prometheus/rules"
 # Port & host
 prometheus_port: 9090
 prometheus_external_hostname: "{{ ansible_nodename }}"
+prometheus_internal_hostname: localhost
 
 prometheus_enable_remote_shutdown: 'false'
 
