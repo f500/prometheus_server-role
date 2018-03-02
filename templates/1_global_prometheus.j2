@@ -38,7 +38,7 @@ scrape_configs:
       - targets:
         - {{ prometheus_internal_hostname }}:9090
 
-{% if grafana_host is defined %}
+{% if grafana_host | default(False) %}
   - job_name: 'grafana'
     static_configs:
       - targets:
