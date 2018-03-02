@@ -42,6 +42,5 @@ scrape_configs:
   - job_name: 'grafana'
     static_configs:
       - targets:
-        - {{ grafana_host }}:9100
-
+        - {{ grafana_host }}:{{ grafana_port | default(9100) }}
 {% endif %}
