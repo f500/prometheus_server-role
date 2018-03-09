@@ -33,7 +33,7 @@ alerting:
 {% endif %}
 
 scrape_configs:
-  - job_name: 'prometheus_statistics'
+  - job_name: 'prometheus'
     static_configs:
       - targets:
         - {{ prometheus_internal_hostname }}:9090
