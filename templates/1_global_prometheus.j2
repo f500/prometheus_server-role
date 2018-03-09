@@ -27,9 +27,9 @@ rule_files:
 {% if prometheus_version.startswith('2') %}
 alerting:
   alertmanagers:
-  - static_configs:
-    - targets:
-      - {{ prometheus_alertmanager_host }}:{{ prometheus_alertmanager_port }}
+    - static_configs:
+      - targets:
+        - {{ prometheus_alertmanager_host }}:{{ prometheus_alertmanager_port }}
 {% endif %}
 
 scrape_configs:
