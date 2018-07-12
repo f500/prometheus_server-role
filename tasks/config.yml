@@ -12,18 +12,18 @@
 - name: PROMETHEUS | Copy rules
   copy:
     src: "{{ item }}"
-    dest: "{{ prometheus_conf_path }}/rules/{{ item | basename}}"
+    dest: "{{ prometheus_conf_path }}/rules/{{ item | basename }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_group }}"
     mode: 0640
   with_fileglob:
-    - "{{ prometheus_rules_templates_path }}/*"
+    - "{{ prometheus_rules_files_path }}/*"
   notify:
     - reload prometheus
 
 - name: PROMETHEUS | Set rules loaded var
   find:
-    paths: "{{ prometheus_rules_templates_path }}"
+    paths: "{{ prometheus_rules_files_path }}"
     file_type: file
   delegate_to: localhost
   become: no
@@ -31,7 +31,7 @@
 
 - name: PROMETHEUS | Set rules templates var
   set_fact:
-    prometheus_rules_templates:  "{{ rules_loaded.files | map(attribute='path') | map('basename') | list }}"
+    prometheus_rules_files:  "{{ rules_loaded.files | map(attribute='path') | map('basename') | list }}"
 
 - name: PROMETHEUS | List all rules in path
   find:
@@ -44,19 +44,7 @@
     path: "{{ prometheus_conf_path }}/rules/{{ item }}"
     state: absent
   with_items:
-    - "{{ all_rules.files | map(attribute='path') | map('basename') | list | difference(prometheus_rules_templates) }}"
-
-- name: PROMETHEUS | Set rules loaded var
-  find:
-    paths: "{{ prometheus_rules_templates_path }}"
-    file_type: file
-  delegate_to: localhost
-  become: no
-  register: rules_loaded
-
-- name: PROMETHEUS | Set rules templates var
-  set_fact:
-    prometheus_rules_templates:  "{{ rules_loaded.files | map(attribute='path') | map('basename') | list }}"
+    - "{{ all_rules.files | map(attribute='path') | map('basename') | list | difference(prometheus_rules_files) }}"
 
 - name: PROMETHEUS | Copy server config (global)
   template:

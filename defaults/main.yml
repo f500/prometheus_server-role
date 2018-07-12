@@ -26,11 +26,9 @@ prometheus_conf_path: "/etc/prometheus"
 prometheus_rules_path: "{{ prometheus_conf_path }}/rules"
 prometheus_data_path: "{{ prometheus_root_path }}/data"
 prometheus_log_path: "/var/log/prometheus"
-prometheus_config_scrapes_files_path: "{{ playbook_dir }}/files/prometheus/config/scrapes"
 prometheus_config_scrapes_templates_path: "{{ playbook_dir }}/templates/prometheus/config/scrapes"
 prometheus_config_vars_templates_path: "{{ playbook_dir }}/templates/prometheus/config/vars"
 prometheus_rules_files_path: "{{ playbook_dir }}/files/prometheus/rules"
-prometheus_rules_templates_path: "{{ playbook_dir }}/templates/prometheus/rules"
 
 # Port & host
 prometheus_port: 9090
@@ -40,7 +38,7 @@ prometheus_internal_hostname: localhost
 prometheus_enable_remote_shutdown: 'false'
 
 # ALERTMANAGER
-prometheus_alertmanager_host: "{{ prometheus_internal_hostname }}"
+prometheus_alertmanager_host: "{{ prometheus_external_hostname }}"
 prometheus_alertmanager_port: 9093
 
 # STORAGE

@@ -20,8 +20,8 @@ global:
   {% endfor %}
 
 rule_files:
-{% for template in prometheus_rules_templates %}
-  - {{ prometheus_conf_path }}/rules/{{ template }}
+{% for file in prometheus_rules_files %}
+  - {{ prometheus_conf_path }}/rules/{{ file }}
 {% endfor %}
 
 {% if prometheus_version.startswith('2') %}
